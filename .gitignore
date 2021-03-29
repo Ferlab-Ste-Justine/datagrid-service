@@ -1,0 +1,6 @@
+node_modules
+dist
+docker/postgres_data
+.env
+.iml
+.vscode
