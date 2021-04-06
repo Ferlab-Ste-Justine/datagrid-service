@@ -3,7 +3,9 @@ import { env } from 'config/env';
 
 export const findAllContentByUserID = async (userID: string): Promise<any> => {
     try {
-        const results = await connectionPool.query('SELECT content FROM data_grid WHERE user_id = $1', [userID]);
+        const results = await connectionPool.query('SELECT content FROM data_grid WHERE user_id = $1 ORDER BY 1 ASC', [
+            userID,
+        ]);
         return results.rows;
     } catch (e) {
         console.error(e.message);
@@ -15,7 +17,7 @@ export const findAllContentByUserIDAndEntityType = async (userID: string, entity
     const type = getEntityType(entityType);
     try {
         const results = await connectionPool.query(
-            'SELECT content FROM data_grid WHERE user_id = $1 and entity_type = $2',
+            'SELECT * FROM data_grid WHERE user_id = $1 and entity_type = $2 ORDER BY 1 ASC',
             [userID, type]
         );
         return results.rows;
@@ -31,6 +33,23 @@ export const findContentByUserIDAndContentID = async (userID: string, contentID:
             userID,
             contentID,
         ]);
+        return results.rows;
+    } catch (e) {
+        console.error(e.message);
+        throw new Error(e.message);
+    }
+};
+
+export const findContentByUserIDAndContentKeyValue = async (
+    userID: string,
+    key: string,
+    value: string
+): Promise<any> => {
+    try {
+        const results = await connectionPool.query(
+            'SELECT * FROM data_grid WHERE user_id = $1 and content ->> $2 = $3',
+            [userID, key, value]
+        );
         return results.rows;
     } catch (e) {
         console.error(e.message);

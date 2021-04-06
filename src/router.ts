@@ -6,6 +6,7 @@ import {
     findAllContentByUserID,
     findAllContentByUserIDAndEntityType,
     findContentByUserIDAndContentID,
+    findContentByUserIDAndContentKeyValue,
     updateContentEntry,
 } from 'controllers/dataGridService';
 
@@ -46,7 +47,22 @@ router.get('/content/:id', async (req: any, res) => {
     }
 });
 
-router.post('/content/:id', async (req: any, res) => {
+router.get('/search', async (req: any, res) => {
+    try {
+        const key = req.query.key;
+        const value = req.query.value;
+        if (!key || !value) {
+            res.status(500).send('Missing key/name parameter');
+        }
+        console.log(key, value);
+        const response: any = await findContentByUserIDAndContentKeyValue(req.user, key, value);
+        res.send(response);
+    } catch (e) {
+        res.status(500).send(e.message);
+    }
+});
+
+router.put('/content/:id', async (req: any, res) => {
     try {
         const response: any = await updateContentEntry(req.user, req.params['id'], req.body);
         res.send(response);
