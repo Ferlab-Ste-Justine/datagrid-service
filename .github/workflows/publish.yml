@@ -16,7 +16,7 @@ jobs:
         with:
           username: ${{ secrets.FERLAB_DOCKER_HUB_USER }}
           password: ${{ secrets.FERLAB_DOCKER_HUB_TOKEN }}
-          image: ferlabcrsj/id-service
+          image: ferlabcrsj/datagrid-service
           tag_source: sha
           location: .
           dockerfile: Dockerfile
