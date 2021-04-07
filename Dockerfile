@@ -8,7 +8,6 @@ RUN npm run build
 RUN rm -rf node_modules
 RUN npm install --only=prod
 
+EXPOSE 5151
 
-EXPOSE 5050
-
-CMD ["node", "./dist/index.js"]
+CMD ["node", "./dist/server.js"]
