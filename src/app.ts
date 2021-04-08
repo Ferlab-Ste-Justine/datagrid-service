@@ -4,9 +4,9 @@ import express, { Response } from 'express';
 import session from 'express-session';
 import Keycloak, { KeycloakConfig, KeycloakOptions } from 'keycloak-connect';
 import morgan from 'morgan';
-import router from 'router';
 
-import { env } from 'config/env';
+import { env } from './config/env';
+import router from './router';
 
 const memoryStore = new session.MemoryStore();
 const app = express();

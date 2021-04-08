@@ -8,7 +8,7 @@ import {
     findContentByUserIDAndContentID,
     findContentByUserIDAndContentKeyValue,
     updateContentEntry,
-} from 'controllers/dataGridService';
+} from './controllers/dataGridService';
 
 const router = express.Router();
 

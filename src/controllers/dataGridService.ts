@@ -1,5 +1,5 @@
-import { connectionPool } from 'config/connection';
-import { env } from 'config/env';
+import { connectionPool } from '~/config/connection';
+import { env } from '~/config/env';
 
 export const findAllContentByUserID = async (userID: string): Promise<any> => {
     try {
