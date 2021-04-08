@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import path from 'path';
 
-import { getKeysEndingWith, getOsEnvOptional, normalizePort, toBool, toNumber } from 'utils';
+import { getKeysEndingWith, getOsEnvOptional, normalizePort, toBool, toNumber } from '~/utils';
 
 /**
  * Load .env file or for tests the .env.test file.
