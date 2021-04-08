@@ -11,6 +11,11 @@ import router from './router';
 const memoryStore = new session.MemoryStore();
 const app = express();
 
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(morgan('tiny'));
+
 app.use(
     session({
         secret: env.app.sessionSecret,
@@ -50,12 +55,6 @@ if (env.app.secure) {
 const defaultRoute = (_, res: Response) => {
     res.sendStatus(404);
 };
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(morgan('tiny'));
-app.use(cors());
-
 app.use('/', router);
 app.use(defaultRoute); // default route has to be last route
 
