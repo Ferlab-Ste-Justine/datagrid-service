@@ -47,6 +47,24 @@ router.get('/content/:id', async (req: any, res) => {
     }
 });
 
+router.put('/content/:id', async (req: any, res) => {
+    try {
+        const response: any = await updateContentEntry(req.user, req.params['id'], req.body);
+        res.send(response);
+    } catch (e) {
+        res.status(500).send(e.message);
+    }
+});
+
+router.delete('/content/:id', async (req: any, res) => {
+    try {
+        await deleteContentEntry(req.user, req.params['id']);
+        res.send();
+    } catch (e) {
+        res.status(500).send(e.message);
+    }
+});
+
 router.get('/search', async (req: any, res) => {
     try {
         const key = req.query.key;
@@ -57,23 +75,6 @@ router.get('/search', async (req: any, res) => {
         console.log(key, value);
         const response: any = await findContentByUserIDAndContentKeyValue(req.user, key, value);
         res.send(response);
-    } catch (e) {
-        res.status(500).send(e.message);
-    }
-});
-
-router.put('/content/:id', async (req: any, res) => {
-    try {
-        const response: any = await updateContentEntry(req.user, req.params['id'], req.body);
-        res.send(response);
-    } catch (e) {
-        res.status(500).send(e.message);
-    }
-});
-router.delete('/content/:id', async (req: any, res) => {
-    try {
-        await deleteContentEntry(req.user, req.params['id']);
-        res.send();
     } catch (e) {
         res.status(500).send(e.message);
     }
